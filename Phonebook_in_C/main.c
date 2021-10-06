@@ -73,10 +73,12 @@ menu();
 }
 }
                                                       //add info//
+
         void add_info()
 {
+            
 
-       system("cls");
+system("cls");
 FILE *files;
 struct phonebook x;
 files=fopen("project","ab+");
