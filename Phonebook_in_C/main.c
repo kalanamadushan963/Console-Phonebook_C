@@ -76,7 +76,46 @@ menu();
         void add_info()
 {
 
-       ****
+       system("cls");
+FILE *files;
+struct phonebook x;
+files=fopen("project","ab+");
+printf("\n Enter Name: ");
+gt(x.fullname);
+printf("\nEnter the Address: ");
+gt(x.add);
+printf("\nEnter Father Nme: ");
+gt(x.f_name);
+printf("\nEnter Mother Name: ");
+gt(x.m_name);
+printf("\nEnter Contact Number.:");
+scanf("%ld",&x.contact_no);
+printf("Enter Gender:");
+gt(x.gender);
+printf("\nEnter Email Address:");
+gt(x.email_add);
+printf("\nEnter Postal Code:");
+gt(x.postal_code);
+fwrite(&x,sizeof(x),1,files);
+
+
+
+fflush(stdin);
+printf("\nNew Record Has Been Successfully Saved");
+
+
+
+fclose(files);
+
+
+
+printf("\n\nEnter any key");
+
+
+
+getch();
+system("cls");
+menu();
 }
 void list_info()
 {
