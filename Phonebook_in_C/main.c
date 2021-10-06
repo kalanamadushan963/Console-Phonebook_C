@@ -73,10 +73,12 @@ menu();
 }
 }
                                                       //add info//
+
         void add_info()
 {
+            
 
-              system("cls");
+system("cls");
 FILE *files;
 struct phonebook x;
 files=fopen("project","ab+");
@@ -178,19 +180,166 @@ menu();
 void delete_info()
 {
 
-    //DELETE//
+   struct phonebook x;
+FILE *files,*file_temp;
+int fl;
+char name[100];
+files=fopen("project","rb");
+if(files==NULL)
+{
 
 
-    ******
+
+printf("CONTACT'S DATA NOT ADDED YET.");
+
+
+
+}
+else
+{
+file_temp=fopen("temp","wb+");
+if(file_temp==NULL)
+
+
+
+printf("file opaning error");
+else
+
+
+
+{
+
+
+
+
+printf("Enter CONTACT'S NAME:");
+gt(name);
+
+
+
+fflush(stdin);
+while(fread(&x,sizeof(x),1,files)==1)
+{
+if(strcmp(x.fullname,name)!=0)
+fwrite(&x,sizeof(x),1,file_temp);
+if(strcmp(x.fullname,name)==0)
+fl=1;
+}
+fclose(files);
+fclose(file_temp);
+if(fl!=1)
+{
+printf("NO CONACT'S RECORD TO DELETE.");
+remove("temp.txt");
+}
+else
+{
+remove("project");
+rename("temp.txt","project");
+printf("RECORD DELETED SUCCESSFULLY.");
+
+
+
+}
+}
+}
+printf("\n Enter any key");
+
+
+
+getch();
+system("cls");
+menu();
 }
 
 void update_info()
 {
              // UPDATE INFO//
 
+int b;
+FILE *files;
+int fl=0;
+struct phonebook x,y;
+char name[50];
+files=fopen("project","rb+");
+if(files==NULL)
+{
 
 
-   ****
+
+printf("CONTACT'S DATA NOT ADDED YET.");
+exit(1);
+
+
+
+
+}
+else
+{
+system("cls");
+printf("\nEnter CONTACT'S NAME TO MODIFY:\n");
+gt(name);
+while(fread(&x,sizeof(x),1,files)==1)
+{
+if(strcmp(name,x.fullname)==0)
+{
+
+
+
+
+
+printf("\n Enter Name:");
+gt(y.fullname);
+printf("\nEnter the Address:");
+gt(y.add);
+printf("\nEnter Father Name:");
+gt(y.f_name);
+printf("\nEnter Mother Name:");
+gt(y.m_name);
+printf("\nEnter Contact Number:");
+scanf("%ld",&y.contact_no);
+printf("\nEnter Gender:");
+gt(y.gender);
+printf("\nEnter Email Address:");
+gt(y.email_add);
+printf("\nEnter Postal Code\n");
+gt(y.postal_code);
+fseek(files,-sizeof(x),SEEK_CUR);
+fwrite(&y,sizeof(x),1,files);
+fl=1;
+break;
+
+
+
+
+
+}
+fflush(stdin);
+
+
+
+
+}
+if(fl==1)
+{
+printf("\n your data id modified");
+
+
+
+}
+else
+{
+printf(" \n data is not found");
+
+
+
+}
+fclose(files);
+}
+printf("\n Enter any key");
+getch();
+system("cls");
+menu();
 
 }
 void gt(char *name)
